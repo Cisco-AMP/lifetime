@@ -1,4 +1,5 @@
 require "lifetime/version"
+require "active_support"
 
 module Lifetime  
   extend ActiveSupport::Concern
@@ -7,11 +8,11 @@ module Lifetime
     @@lifetime_start_field = "start_at"
     @@lifetime_end_field = "end_at"
 
-    scope :lifetime_active, ->(time = Time.now) { where(" ? <= ? AND ? >= ?", @@lifetime_start_field, time, @@lifetime_end_field, time).lifetime_ordered }
-    scope :lifetime_inactive, ->(time = Time.now) { where(" ? > ? || AND ? < ?", @@lifetime_start_field, time, @@lifetime_end_field, time) }
-    scope :lifetime_expired, ->(time = Time.now) { where(" ? < ?", @@lifetime_end_field, time).order(end_at: :desc) }
-    scope :lifetime_future, ->(time = Time.now) { where(" ? > ?", @@lifetime_start_field, time).lifetime_ordered }
-    scope :lifetime_ordered, -> {order(start_at: :asc)}
+    scope :lifetime_active, ->(time = Time.now) { where(" #{@@lifetime_start_field} <= ? AND #{@@lifetime_end_field} >= ?", time, time).lifetime_ordered }
+    scope :lifetime_inactive, ->(time = Time.now) { where(" #{@@lifetime_start_field} > ? OR #{@@lifetime_end_field} < ?", time, time) }
+    scope :lifetime_expired, ->(time = Time.now) { where(" #{@@lifetime_end_field} < ?", time).order("#{@@lifetime_end_field} desc") }
+    scope :lifetime_future, ->(time = Time.now) { where(" #{@@lifetime_start_field} > ?", time).lifetime_ordered }
+    scope :lifetime_ordered, -> {order("#{@@lifetime_start_field} asc")}
   end
 
   module ClassMethods    
