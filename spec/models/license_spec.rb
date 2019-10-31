@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 RSpec.describe License do 
-  let(:five_days_ago)             {  Time.now - 5.days }
+  let(:five_days_ago)             { Time.now - 5.days }
   let(:five_days_after)           { Time.now + 5.days }
-  let(:ten_days_ago)              {  Time.now - 10.days }
+  let(:ten_days_ago)              { Time.now - 10.days }
   let(:ten_days_after)            { Time.now + 10.days }
   let(:twenty_days_after)         { Time.now + 20.days }
   let(:active_license)            { License.create(name: 'Active license', start_date: five_days_ago, end_date: five_days_after) }
@@ -26,7 +26,7 @@ RSpec.describe License do
 
   describe "#lifetime_inactive" do 
     it 'returns the future licenses' do 
-      expect(License.lifetime_inactive.map(&:id)).to be == [expired_license.id, future_license.id, another_future_license.id]
+      expect(License.lifetime_inactive.map(&:id)).to be == [future_license.id, expired_license.id, another_future_license.id]
     end
   end
 

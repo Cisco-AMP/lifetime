@@ -17,7 +17,35 @@ ActiveRecord::Schema.define :version => 0 do
   end
 end
 
+ActiveRecord::Schema.define :version => 0 do
+  create_table :meetings, :force => true do |t|
+    t.string   :name
+    t.datetime :start_at
+    t.datetime :end_at
+  end
+end
+
+ActiveRecord::Schema.define :version => 0 do
+  create_table :exams, :force => true do |t|
+    t.string   :name
+    t.datetime :exam_start_at
+    t.datetime :exam_end_at
+  end
+end
+
+class Meeting < ActiveRecord::Base
+  include Lifetime
+end
+
 class License < ActiveRecord::Base
   include Lifetime
   lifetime_fields :start_date, :end_date
 end
+
+class Exam < ActiveRecord::Base
+  include Lifetime
+  lifetime_fields :exam_start_at, :exam_end_at
+end
+
+
+
