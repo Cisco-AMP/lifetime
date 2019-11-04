@@ -22,7 +22,26 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Include lifetime to you model:
+
+``` ruby
+#use the default lifetime fields: start_at, end_at
+class License < ActiveRecord::Base
+  include Lifetime 
+end
+
+#use the custom lifetime fields
+class License < ActiveRecord::Base
+  include Lifetime 
+  lifetime_fields :start_date, :end_date
+end
+
+License.lifetime #returns lifetime of the license
+License.first.lifetime_expired? #returns true if the license is expired
+```
+
+Check specs for more usage
+
 
 ## Development
 
