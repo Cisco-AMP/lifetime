@@ -111,4 +111,32 @@ RSpec.describe License do
     end
   end
 
+  describe "#lifetime" do 
+    it "returns lifetime" do 
+      expect(active_license.lifetime).to be == (five_days_ago.utc..five_days_after.utc)
+    end
+  end
+
+  describe "#lifetime_next_future" do 
+    it "returns lifetime_next_future" do 
+      expect(active_license.lifetime_next_future).to eql(future_license)
+    end
+  end
+
+  describe "#lifetime_last_expired" do 
+    it "returns lifetime_last_expired" do 
+      expect(active_license.lifetime_last_expired).to eql(expired_license)
+    end
+  end
+
+  describe "#lifetime_overlaps?" do 
+    it "returns true if overlaps" do 
+      expect(expired_license.lifetime_overlaps?(active_license)).to eql(true)
+    end
+
+    it "returns false if does not overlap" do 
+      expect(another_future_license.lifetime_overlaps?(active_license)).to eql(false)
+    end
+  end
+
 end
