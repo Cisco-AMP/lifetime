@@ -5,7 +5,6 @@ unless ENV['DB']
   ENV['DB'] = 'sqlite'
 end
 
-ActiveRecord::Base.logger = Logger.new('tmp/ar_debug.log')
 ActiveRecord::Base.configurations = YAML::load(IO.read('spec/support/database.yml'))
 ActiveRecord::Base.establish_connection(ENV['DB'].to_sym)
 
