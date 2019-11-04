@@ -44,8 +44,8 @@ RSpec.describe License do
 
   describe "#lifetime_ordered" do 
     it 'orders the licences by the start date' do 
-      expect(License.all.lifetime_ordered.first.start_date).to be == ten_days_ago
-      expect(License.all.lifetime_ordered.last.start_date).to be == ten_days_after
+      expect(License.all.lifetime_ordered.first.start_date.to_date).to be == ten_days_ago.to_date
+      expect(License.all.lifetime_ordered.last.start_date.to_date).to be == ten_days_after.to_date
     end
   end
 
