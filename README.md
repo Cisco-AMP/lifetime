@@ -3,6 +3,8 @@
 Use this for your ActiveRecord models that are time bound with a start
 and stop time.
 
+![Ruby](https://github.com/Cisco-AMP/lifetime/workflows/Ruby/badge.svg)
+
 ## Installation
 
 Add this line to your application's Gemfile:
