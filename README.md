@@ -1,8 +1,7 @@
 # Lifetime
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/lifetime`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Use this for your ActiveRecord models that are time bound with a start
+and stop time.
 
 ## Installation
 
@@ -27,12 +26,12 @@ Include lifetime to you model:
 ``` ruby
 #use the default lifetime fields: start_at, end_at
 class License < ActiveRecord::Base
-  include Lifetime 
+  include Lifetime
 end
 
 #use the custom lifetime fields
 class License < ActiveRecord::Base
-  include Lifetime 
+  include Lifetime
   lifetime_fields :start_date, :end_date
 end
 
@@ -51,7 +50,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/lifetime.
+Bug reports and pull requests are welcome on GitHub at https://github.com/Cisco-AMP/lifetime.
 
 ## License
 
