@@ -9,9 +9,9 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Ariyan Zohoorian", "S M Shahnewaz"]
   spec.email         = ["azohoori@cisco.com", "sshahnew@cisco.com"]
 
-  spec.summary       = %q{Write a short summary, because RubyGems requires one.}
-  spec.description   = %q{Write a longer description or delete this line.}
-  #spec.homepage      = "Put your gem's website or public repo URL here."
+  spec.summary       = %q{Start and end timestamp logic for ActiveRecord}
+  spec.description   = %q{Provides a common set of APIs for ActiveRecord models that have a start and end time}
+  spec.homepage      = "https://github.com/Cisco-AMP/lifetime"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
@@ -39,7 +39,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "activerecord", "~> 5.0.0"
   spec.add_development_dependency "sqlite3",  '~> 1.3.6'
   spec.add_development_dependency "database_cleaner", "~> 1.7.0"
-  spec.add_development_dependency "bundler", "~> 1.17.3"
-  spec.add_development_dependency "rake", "~> 10.0"
+  spec.add_development_dependency "bundler"
+  spec.add_development_dependency "rake", "~> 13.0"
   spec.add_development_dependency "rspec", "~> 3.0"
 end
