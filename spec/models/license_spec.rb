@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe License do 
+RSpec.describe License do
   let(:five_days_ago)             { Time.now - 5.days }
   let(:five_days_after)           { Time.now + 5.days }
   let(:ten_days_ago)              { Time.now - 10.days }
@@ -18,50 +18,50 @@ RSpec.describe License do
     another_future_license
   }
 
-  describe "#lifetime_active" do 
-    it 'returns the future licenses' do 
+  describe "#lifetime_active" do
+    it 'returns the future licenses' do
       expect(License.lifetime_active.map(&:id)).to be == [active_license.id]
     end
   end
 
-  describe "#lifetime_inactive" do 
-    it 'returns the future licenses' do 
+  describe "#lifetime_inactive" do
+    it 'returns the future licenses' do
       expect(License.lifetime_inactive.map(&:id)).to be == [future_license.id, expired_license.id, another_future_license.id]
     end
   end
 
-  describe "#lifetime_expired" do 
-    it 'returns the future licenses' do 
+  describe "#lifetime_expired" do
+    it 'returns the future licenses' do
       expect(License.lifetime_expired.map(&:id)).to be == [expired_license.id]
     end
   end
 
-  describe "#lifetime_future" do 
-    it 'returns the future licenses' do 
+  describe "#lifetime_future" do
+    it 'returns the future licenses' do
       expect(License.lifetime_future.map(&:id)).to be == [future_license.id, another_future_license.id]
     end
   end
 
-  describe "#lifetime_ordered" do 
-    it 'orders the licences by the start date' do 
+  describe "#lifetime_ordered" do
+    it 'orders the licences by the start date' do
       expect(License.all.lifetime_ordered.first.start_date.to_date).to be == ten_days_ago.to_date
       expect(License.all.lifetime_ordered.last.start_date.to_date).to be == ten_days_after.to_date
     end
   end
 
-  describe "#lifetime_start_at" do 
+  describe "#lifetime_start_at" do
     it "returns the lifetime start date" do
       expect(active_license.lifetime_start_at).to eql(five_days_ago)
     end
   end
 
-  describe "#lifetime_end_at" do 
+  describe "#lifetime_end_at" do
     it "returns the lifetime start date" do
       expect(active_license.lifetime_end_at).to eql(five_days_after)
     end
   end
 
-  describe "#lifetime_active?" do 
+  describe "#lifetime_active?" do
     it "returns true for active license" do
       expect(active_license.lifetime_active?).to eql(true)
     end
@@ -72,7 +72,7 @@ RSpec.describe License do
     end
   end
 
-  describe "#lifetime_inactive?" do 
+  describe "#lifetime_inactive?" do
     it "returns true for inactive/expired license" do
       expect(expired_license.lifetime_inactive?).to eql(true)
       expect(future_license.lifetime_inactive?).to eql(true)
@@ -83,7 +83,7 @@ RSpec.describe License do
     end
   end
 
-  describe "#lifetime_expired?" do 
+  describe "#lifetime_expired?" do
     it "returns false for active license" do
       expect(active_license.lifetime_expired?).to eql(false)
     end
@@ -97,7 +97,7 @@ RSpec.describe License do
     end
   end
 
-  describe "#lifetime_future?" do 
+  describe "#lifetime_future?" do
     it "returns false for active license" do
       expect(active_license.lifetime_future?).to eql(false)
     end
@@ -111,30 +111,30 @@ RSpec.describe License do
     end
   end
 
-  describe "#lifetime" do 
-    it "returns lifetime" do 
+  describe "#lifetime" do
+    it "returns lifetime" do
       expect(active_license.lifetime).to be == (five_days_ago.utc..five_days_after.utc)
     end
   end
 
-  describe "#lifetime_next_future" do 
-    it "returns lifetime_next_future" do 
+  describe "#lifetime_next_future" do
+    it "returns lifetime_next_future" do
       expect(active_license.lifetime_next_future).to eql(future_license)
     end
   end
 
-  describe "#lifetime_last_expired" do 
-    it "returns lifetime_last_expired" do 
+  describe "#lifetime_last_expired" do
+    it "returns lifetime_last_expired" do
       expect(active_license.lifetime_last_expired).to eql(expired_license)
     end
   end
 
-  describe "#lifetime_overlaps?" do 
-    it "returns true if overlaps" do 
+  describe "#lifetime_overlaps?" do
+    it "returns true if overlaps" do
       expect(expired_license.lifetime_overlaps?(active_license)).to eql(true)
     end
 
-    it "returns false if does not overlap" do 
+    it "returns false if does not overlap" do
       expect(another_future_license.lifetime_overlaps?(active_license)).to eql(false)
     end
   end
