@@ -46,5 +46,3 @@ class Exam < ActiveRecord::Base
   lifetime_fields :exam_start_at, :exam_end_at
 end
 
-
-
