@@ -17,9 +17,9 @@ jobs:
       uses: actions/setup-ruby@v1
       with:
         ruby-version: 2.6.x
-        extensions: sqlite
     - name: Build and test with Rake
       run: |
+        apt-get install -y libsqlite3-dev
         gem install bundler
         bundle install --jobs 4 --retry 3
         bundle exec rake
